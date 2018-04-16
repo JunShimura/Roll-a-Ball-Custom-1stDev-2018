@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ItemInnerLight : MonoBehaviour {
 
-    private Light light;
+    private new Light light;
     public float ratio=0.9f;
 
     // Use this for initialization

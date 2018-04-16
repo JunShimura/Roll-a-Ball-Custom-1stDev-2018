@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public float upForce = 20.0f;
     public KeyCode jumpKey = KeyCode.Space;
     private Vector3 force = new Vector3();
-    private Rigidbody rigidbody;
+    private new Rigidbody rigidbody;
     [SerializeField]
     GameObject brokenParticle;
     [SerializeField]
@@ -46,8 +46,12 @@ public class PlayerController : MonoBehaviour
         force.x = Input.GetAxis("Horizontal") * speed;
         force.z = Input.GetAxis("Vertical") * speed;
 
-        if ((Input.GetKeyDown(jumpKey)||Input.GetButtonDown("Jump")) && collisionFlag) {
-            force.y = upForce;
+        if (Input.GetKeyDown(jumpKey) || Input.GetButtonDown("Jump")) {
+            Debug.Log("input JUMP");
+            if (collisionFlag) {
+                force.y = upForce;
+                Debug.Log("JUMPED!");
+            }
         }
         else {
             force.y = 0.0f;
@@ -56,11 +60,14 @@ public class PlayerController : MonoBehaviour
         if (force.magnitude != 0.0f) {
             gameController.GetComponent<GameController>().isStarted = true;
         }
+
+
     }
 
     void FixedUpdate()
     {
         if (force != Vector3.zero & rigidbody != null) {
+            Debug.Log("ADDFORCE");
             rigidbody.AddForce(force * speed);
         }
     }
@@ -69,6 +76,7 @@ public class PlayerController : MonoBehaviour
         collisionFlag = true;
         if (!contactGameObjectID.Contains(collision.gameObject.GetInstanceID())) {
             contactGameObjectID.Add(collision.gameObject.GetInstanceID());
+            Debug.Log("Enter" + collision.gameObject.name);
         }
     }
     private void OnCollisionStay(Collision collision)
@@ -76,12 +84,14 @@ public class PlayerController : MonoBehaviour
         collisionFlag = true;
         if (!contactGameObjectID.Contains(collision.gameObject.GetInstanceID())) {
             contactGameObjectID.Add(collision.gameObject.GetInstanceID());
+            Debug.Log("Stay" + collision.gameObject.name);
         }
     }
     private void OnCollisionExit(Collision collision)
     {
         if (contactGameObjectID.Contains(collision.gameObject.GetInstanceID())) {
             contactGameObjectID.Remove(collision.gameObject.GetInstanceID());
+            Debug.Log("Exit" + collision.gameObject.name);
         }
         if (contactGameObjectID.Count == 0) {
             collisionFlag = false;
