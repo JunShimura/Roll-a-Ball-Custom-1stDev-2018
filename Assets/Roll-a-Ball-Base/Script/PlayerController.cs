@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityStandardAssets.CrossPlatformInput;
 
+[RequireComponent(typeof(Rigidbody))]
+
 public class PlayerController : MonoBehaviour
 {
     public float speed = 10;
@@ -11,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public float animationRate = 10.0f;
 
     [SerializeField] GameObject brokenParticle;
-    [SerializeField] float brokenTime = 0.5f;
+    [SerializeField] float      brokenTime = 0.5f;
     [SerializeField] GameObject gameController;
 
     private Vector3 force = new Vector3();
@@ -51,8 +53,6 @@ public class PlayerController : MonoBehaviour
             isStarted = true;
             gameController.GetComponent<GameController>().isStarted = true;
         }
-
-
     }
 
     void FixedUpdate()
@@ -88,22 +88,24 @@ public class PlayerController : MonoBehaviour
     }
     public void SetBroken()
     {
+        //破壊された時の処理
         GameObject particleInstance = GameObject.Instantiate(brokenParticle, transform.position, Quaternion.identity);
         gameController.GetComponent<GameController>().ResetScene(brokenTime);
         Destroy(particleInstance, brokenTime);
         rigidbody.velocity = Vector3.zero;
-        Destroy(rigidbody);
+        rigidbody.isKinematic = true;
 
         Destroy(gameObject, brokenTime);
     }
     public void SetClear()
     {
-        Destroy(rigidbody);
+        //レベルクリア時の処理
+        rigidbody.isKinematic = true;
         transform.LookAt(GameObject.Find("Main Camera").transform);
-        StartCoroutine(AnimationCoroutine());
+        StartCoroutine(BrokenAnimationCoroutine());
     }
 
-    private IEnumerator AnimationCoroutine()
+    private IEnumerator BrokenAnimationCoroutine()
     {
         for (;;) {
             transform.Rotate(Vector3.forward * animationRate);

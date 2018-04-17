@@ -6,14 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/stage01.unity
+    path: 
     guid: 00000000000000000000000000000000
-  - enabled: 0
+  - enabled: 1
     path: Assets/Roll-a-Ball-Base/stage01.unity
     guid: 9a71d093b346a2747884ba76e4c9748b
   - enabled: 0
     path: 
-    guid: 36a8a9c12ca3f6441a7fbe1b5e4a5baf
-  - enabled: 1
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Roll-a-Ball-Base/stage02.unity
     guid: 273ba876d6a11f84cac92d36402a94b4
