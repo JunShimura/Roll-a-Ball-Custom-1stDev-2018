@@ -15,8 +15,6 @@ public class ScoreController : MonoBehaviour {
     [SerializeField]
     float changeTime = 0.5f;
 
-    private float value = 1.0f;
-    private float currentValue = 1.0f;
     private float fadeTime = 0.0f;
 
     // Use this for initialization

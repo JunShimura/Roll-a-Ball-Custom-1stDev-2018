@@ -8,7 +8,6 @@ public class Item : MonoBehaviour
 {
     public float destroyDelayTime = 1.0f;
     private Animator animator;
-    bool broken = false;
     private Transform innerLight; 
 
 
@@ -33,13 +32,6 @@ public class Item : MonoBehaviour
             Destroy(GetComponent<Renderer>(),destroyDelayTime);
             innerLight.gameObject.SetActive(true);
             Destroy(gameObject,destroyDelayTime);
-            broken = true;
         }
-    }
-    private void Update()
-    {
-        //if (broken && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f) {
-        //    Destroy(gameObject,destroyDelayTime);
-        //}
     }
 }

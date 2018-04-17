@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerRendererController : MonoBehaviour
 {
 
-    private Renderer renderer;
+    private new Renderer renderer;
     public float animationTime = 0.8f;
     public float animationRate = 0.1f;
     public Color emissionColor = Color.white / 2;

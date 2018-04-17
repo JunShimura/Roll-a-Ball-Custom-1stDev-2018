@@ -5,23 +5,21 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController : MonoBehaviour
 {
-    // speedを制御する
     public float speed = 10;
     public float upForce = 20.0f;
-    public KeyCode jumpKey = KeyCode.Space;
-    private Vector3 force = new Vector3();
-    private new Rigidbody rigidbody;
-    [SerializeField]
-    GameObject brokenParticle;
-    [SerializeField]
-    float brokenTime = 0.5f;
-    [SerializeField]
-    GameObject gameController;
     public float animationFrameRate = 10f;
     public float animationRate = 10.0f;
 
-    bool collisionFlag = false;
-    List<int> contactGameObjectID = new List<int>();
+    [SerializeField] GameObject brokenParticle;
+    [SerializeField] float brokenTime = 0.5f;
+    [SerializeField] GameObject gameController;
+
+    private Vector3 force = new Vector3();
+    private new Rigidbody rigidbody;
+    private bool collisionFlag = false;
+    private bool toJump = false;
+    private bool isStarted = false;
+    private List<int> contactGameObjectID = new List<int>();
 
     private void Start()
     {
@@ -35,29 +33,22 @@ public class PlayerController : MonoBehaviour
 #if UNITY_ANDROID
         force.x= CrossPlatformInputManager.GetAxisRaw("Horizontal");
         force.z= CrossPlatformInputManager.GetAxisRaw("Vertical");
-        if (CrossPlatformInputManager.GetButton("Jump")&& collisionFlag) {
-            force.y = upForce;
-        }
-        else {
-            force.y = 0.0f;
+        if (CrossPlatformInputManager.GetButton("Jump")&& collisionFlag  && !toJump) {
+            toJump = true;
+            force.y = upForce; 
         }
 #else
 
         force.x = Input.GetAxis("Horizontal") * speed;
         force.z = Input.GetAxis("Vertical") * speed;
 
-        if (Input.GetKeyDown(jumpKey) || Input.GetButtonDown("Jump")) {
-            Debug.Log("input JUMP");
-            if (collisionFlag) {
-                force.y = upForce;
-                Debug.Log("JUMPED!");
-            }
-        }
-        else {
-            force.y = 0.0f;
+        if (Input.GetButtonDown("Jump") && collisionFlag && !toJump) {
+            toJump = true;
+            force.y = upForce;
         }
 #endif
-        if (force.magnitude != 0.0f) {
+        if (!isStarted && force.magnitude != 0.0f) {
+            isStarted = true;
             gameController.GetComponent<GameController>().isStarted = true;
         }
 
@@ -67,8 +58,9 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         if (force != Vector3.zero & rigidbody != null) {
-            Debug.Log("ADDFORCE");
             rigidbody.AddForce(force * speed);
+            toJump = false;
+            force.y = 0;
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -76,7 +68,6 @@ public class PlayerController : MonoBehaviour
         collisionFlag = true;
         if (!contactGameObjectID.Contains(collision.gameObject.GetInstanceID())) {
             contactGameObjectID.Add(collision.gameObject.GetInstanceID());
-            Debug.Log("Enter" + collision.gameObject.name);
         }
     }
     private void OnCollisionStay(Collision collision)
@@ -84,14 +75,12 @@ public class PlayerController : MonoBehaviour
         collisionFlag = true;
         if (!contactGameObjectID.Contains(collision.gameObject.GetInstanceID())) {
             contactGameObjectID.Add(collision.gameObject.GetInstanceID());
-            Debug.Log("Stay" + collision.gameObject.name);
         }
     }
     private void OnCollisionExit(Collision collision)
     {
         if (contactGameObjectID.Contains(collision.gameObject.GetInstanceID())) {
             contactGameObjectID.Remove(collision.gameObject.GetInstanceID());
-            Debug.Log("Exit" + collision.gameObject.name);
         }
         if (contactGameObjectID.Count == 0) {
             collisionFlag = false;

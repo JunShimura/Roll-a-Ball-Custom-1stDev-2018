@@ -12,7 +12,6 @@ public class TurnPhysical : MonoBehaviour
     [Header("移動する距離"), Range(0, 30)]
     public float distance = 1.0f;
 
-    float direction = 1;
     float pastTime = 0;
     Vector3 homePosition;
     Vector3 targetPosition;
