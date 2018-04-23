@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour {
 #if UNITY_ANDROID
         force.x= CrossPlatformInputManager.GetAxisRaw("Horizontal");
         force.z= CrossPlatformInputManager.GetAxisRaw("Vertical");
-        if (CrossPlatformInputManager.GetButton("Jump")&& collisionFlag  && !toJump) {
+        if (CrossPlatformInputManager.GetButtonDown("Jump")&& collisionFlag  && !toJump) {
             toJump = true;
             force.y = upForce; 
         }
@@ -114,10 +114,10 @@ public class PlayerController : MonoBehaviour {
         //レベルクリア時の処理
         rigidbody.isKinematic = true;
         transform.LookAt(GameObject.Find("Main Camera").transform);
-        StartCoroutine(BrokenAnimationCoroutine());
+        StartCoroutine(ClearAnimationCoroutine());
     }
 
-    private IEnumerator BrokenAnimationCoroutine()
+    private IEnumerator ClearAnimationCoroutine()
     {
         for (;;)
         {

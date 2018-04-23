@@ -572,6 +572,10 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 699879097}
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!1 &560718221 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 9529ecc3d479da5499993355e6c2cb4f, type: 2}
+  m_PrefabInternal: {fileID: 1924951278}
 --- !u!1 &608434618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,15 +1258,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 9529ecc3d479da5499993355e6c2cb4f, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 9529ecc3d479da5499993355e6c2cb4f, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 9529ecc3d479da5499993355e6c2cb4f, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9529ecc3d479da5499993355e6c2cb4f, type: 2}
+      propertyPath: m_TagString
+      value: MobileSingleStickControl
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9529ecc3d479da5499993355e6c2cb4f, type: 2}
@@ -1300,6 +1308,7 @@ MonoBehaviour:
   winnerLabel: {fileID: 360750768}
   player: {fileID: 0}
   gameStartCanvas: {fileID: 1584511836}
+  mobileSingleStickControl: {fileID: 560718221}
   isStarted: 0
   winnerComment:
   - "\u2605\u2605\u2605"

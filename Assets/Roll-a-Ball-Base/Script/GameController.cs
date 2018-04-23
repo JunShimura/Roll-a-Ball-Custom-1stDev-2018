@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public GameObject winnerLabel;
     public GameObject player;
     public GameObject gameStartCanvas;
+    public GameObject mobileSingleStickControl;
     public bool isStarted = false;
 
 
@@ -36,7 +37,9 @@ public class GameController : MonoBehaviour
         scoreController.SetGageUnit(initialCount);
         scoreController.ChangeValue(0);
         pastTime = 0.0f;
-
+#if UNITY_ANDROID
+        mobileSingleStickControl.SetActive(true);
+#endif
 
 
     }
