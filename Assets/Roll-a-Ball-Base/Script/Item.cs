@@ -7,7 +7,10 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public float destroyDelayTime = 1.0f;
+    private AudioSource audioSource;
+    private new Collider collider;
     private Animator animator;
+    private new Renderer renderer;
     private Transform innerLight; 
 
 
@@ -15,6 +18,9 @@ public class Item : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         innerLight = transform.GetChild(0);
+        audioSource = GetComponent<AudioSource>();
+        collider = GetComponent<Collider>();
+        renderer = GetComponent<Renderer>();
 
     }
 
@@ -25,11 +31,11 @@ public class Item : MonoBehaviour
         if (hit.CompareTag("Player")) {
             hit.gameObject.transform.GetComponentInChildren<PlayerRendererController>().SetAnimation();
             // このコンポーネントを持つGameObjectを破棄する
-            GetComponent<AudioSource>().Play();
-            GetComponent<Collider>().enabled = false;
+            audioSource.Play();
+            collider.enabled = false;
             gameObject.transform.tag = "BrokenItem";
             animator.SetTrigger("broken");
-            Destroy(GetComponent<Renderer>(),destroyDelayTime);
+            Destroy(renderer,destroyDelayTime);
             innerLight.gameObject.SetActive(true);
             Destroy(gameObject,destroyDelayTime);
         }

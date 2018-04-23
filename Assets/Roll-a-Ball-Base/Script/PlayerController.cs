@@ -5,15 +5,14 @@ using UnityStandardAssets.CrossPlatformInput;
 
 [RequireComponent(typeof(Rigidbody))]
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour {
     public float speed = 10;
     public float upForce = 20.0f;
     public float animationFrameRate = 10f;
     public float animationRate = 10.0f;
 
     [SerializeField] GameObject brokenParticle;
-    [SerializeField] float      brokenTime = 0.5f;
+    [SerializeField] float brokenTime = 0.5f;
     [SerializeField] GameObject gameController;
 
     private Vector3 force = new Vector3();
@@ -23,8 +22,14 @@ public class PlayerController : MonoBehaviour
     private bool isStarted = false;
     private List<int> contactGameObjectID = new List<int>();
 
+    private void Reset()
+    {
+        gameController = GameObject.FindGameObjectWithTag("GameController");
+        gameController.GetComponent<GameController>().player = this.gameObject;
+    }
     private void Start()
     {
+        Reset();
         force = Vector3.zero;
         rigidbody = GetComponent<Rigidbody>();
     }
@@ -44,12 +49,14 @@ public class PlayerController : MonoBehaviour
         force.x = Input.GetAxis("Horizontal") * speed;
         force.z = Input.GetAxis("Vertical") * speed;
 
-        if (Input.GetButtonDown("Jump") && collisionFlag && !toJump) {
+        if (Input.GetButtonDown("Jump") && collisionFlag && !toJump)
+        {
             toJump = true;
             force.y = upForce;
         }
 #endif
-        if (!isStarted && force.magnitude != 0.0f) {
+        if (!isStarted && force.magnitude != 0.0f)
+        {
             isStarted = true;
             gameController.GetComponent<GameController>().isStarted = true;
         }
@@ -57,7 +64,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (force != Vector3.zero & rigidbody != null) {
+        if (force != Vector3.zero & rigidbody != null)
+        {
             rigidbody.AddForce(force * speed);
             toJump = false;
             force.y = 0;
@@ -66,23 +74,27 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         collisionFlag = true;
-        if (!contactGameObjectID.Contains(collision.gameObject.GetInstanceID())) {
+        if (!contactGameObjectID.Contains(collision.gameObject.GetInstanceID()))
+        {
             contactGameObjectID.Add(collision.gameObject.GetInstanceID());
         }
     }
     private void OnCollisionStay(Collision collision)
     {
         collisionFlag = true;
-        if (!contactGameObjectID.Contains(collision.gameObject.GetInstanceID())) {
+        if (!contactGameObjectID.Contains(collision.gameObject.GetInstanceID()))
+        {
             contactGameObjectID.Add(collision.gameObject.GetInstanceID());
         }
     }
     private void OnCollisionExit(Collision collision)
     {
-        if (contactGameObjectID.Contains(collision.gameObject.GetInstanceID())) {
+        if (contactGameObjectID.Contains(collision.gameObject.GetInstanceID()))
+        {
             contactGameObjectID.Remove(collision.gameObject.GetInstanceID());
         }
-        if (contactGameObjectID.Count == 0) {
+        if (contactGameObjectID.Count == 0)
+        {
             collisionFlag = false;
         }
     }
@@ -107,7 +119,8 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator BrokenAnimationCoroutine()
     {
-        for (;;) {
+        for (;;)
+        {
             transform.Rotate(Vector3.forward * animationRate);
             yield return new WaitForSeconds(1 / animationFrameRate);
         }
