@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public Canvas canvas;
-    public Image scoreImage;
-    public GameObject winnerLabelObject;
-    public GameObject winnerLabel;
+    [SerializeField] Canvas canvas;
+    [SerializeField] Image scoreImage;
+    [SerializeField] GameObject winnerLabelObject;
+    [SerializeField] GameObject winnerLabel;
+    [SerializeField] GameObject gameStartCanvas;
+    [SerializeField] GameObject mobileSingleStickControl;
     public GameObject player;
-    public GameObject gameStartCanvas;
-    public GameObject mobileSingleStickControl;
     public bool isStarted = false;
 
 
