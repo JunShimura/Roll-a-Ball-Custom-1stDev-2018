@@ -46,9 +46,9 @@ https://www.slideshare.net/junshimura/rakugaku2017-unity1st-dev
   - 加速、減速する
   - 複数動作の組み合わせ
 - 上級
- - 色を変える
- - Palyerに向かって追いかけてくる
- - レベルの追加
+  - 色を変える
+  - Palyerに向かって追いかけてくる
+  - レベルの追加
 
 ### Unity経験者の利用方法
 元は単純にできているので、更に特化した教材などにお役立てください。特に、以下について改造すると、Unity DeveloperのCertificationを学習するのにも役立つと思います。
