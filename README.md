@@ -3,7 +3,7 @@
 このUnityプロジェクトは、Unity社が提供する「はじめてのUnity」をベースに、Unityに初めて触れる人が、ゲームを創ることがどういうものかを出来るだけ単純に体験するとを目的に制作したもので、Unity経験者が初心者にペアで利用することを想定ます。
 
 WebGL版を公開していますので、そちらをプレイしていただけると内容が分かります。
-https://junshimura.github.io/Roll-a-Ball-Custom-1stDev-2018/WebGL/
+https://unityroom.com/games/rollaballcustom1stdev2018sample
 
 - できるだけシンプルにするために、他のAssetはStanderdAssetsのMobileInputのみにしています
 - ScriptのNameSpaceは、誰でも初期状態で利用できる、Unity社およびマイクロソフト社謹製のC#標準的なのもののみを利用しています
