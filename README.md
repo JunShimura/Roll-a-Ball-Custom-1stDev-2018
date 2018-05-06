@@ -16,7 +16,7 @@ https://unityroom.com/games/rollaballcustom1stdev2018sample
 Downloadでの、基本的な利用方法を説明します。
 ### プレイするまでの手順
 1. DownloadしたZipを適宜、解凍してください
-1. Unity(2017.4以降を推奨)を起動し、ProjectとしてDownloadしたフォルダを指定してください
+1. Unity(2018.1以降を推奨)を起動し、ProjectとしてDownloadしたフォルダを指定してください
 1. Assets/Roll-a-Ball-Base/内のStage01.sceneを開いてください
 1. エディタのプレイボタンでプレイできます
  1. キー操作はWASDかカーソルキー、ゲームパッドのアナログスティックで移動、スペースキーかゲームパッドのAボタンでジャンプします
