@@ -255,6 +255,12 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 82519002707154220, guid: af3c1308da6e2bd4a91b999aa5cf2fec,
+        type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: fce8c039f9684d3488b235c0c685b9b7,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: af3c1308da6e2bd4a91b999aa5cf2fec, type: 2}
   m_IsPrefabParent: 0
@@ -1116,6 +1122,12 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 954672405}
+    - target: {fileID: 114197903756969728, guid: 8b99d28635cc6864f97cd53f1afc1319,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 61a89089f4332e547be3de894f82fd46,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8b99d28635cc6864f97cd53f1afc1319, type: 2}
   m_IsPrefabParent: 0

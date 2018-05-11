@@ -11,14 +11,14 @@ public class Item : MonoBehaviour
     private new Collider collider;
     private Animator animator;
     private new Renderer renderer;
-    private Transform innerLight; 
-
+    private Transform innerLight;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         innerLight = transform.GetChild(0);
         audioSource = GetComponent<AudioSource>();
+        //collider = GetComponent<Collider>();
         collider = GetComponent<Collider>();
         renderer = GetComponent<Renderer>();
 
