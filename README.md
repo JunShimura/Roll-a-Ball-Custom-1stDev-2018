@@ -24,7 +24,7 @@ Downloadでの、基本的な利用方法を説明します。
 ### はじめて触る初心者向け
 ワークショップなどで初めていじる人を考えたものです。
 当方で利用したスライドを公開しています、初心者はこれを見つつ以下を参考にするのが簡単です。各自で用意されてもいいと思います。
-https://www.slideshare.net/junshimura/roll-aballcustom1st-dev2018forrakugaku2017-95832305
+https://www.slideshare.net/junshimura/rakugaku2017unity1stdev-98037982
 #### 簡単な配置のカスタマイズ
 1. 上記のStage01を選択した状態で、[Edit]>[Dupulicate]を選んで複製します、するとStage02.sceneが出来上がります
 1. 適宜、不要なオブジェクトを、エディタのSceneで削除してください。このとき、削除すると困るものを非アクティブで隠しているので、Hierarchyは触らないほうが無難です。初心者は教えない限り、あまり、触らないと思います。
