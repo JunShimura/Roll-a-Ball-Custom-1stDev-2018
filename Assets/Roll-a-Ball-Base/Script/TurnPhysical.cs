@@ -21,7 +21,7 @@ public class TurnPhysical : MonoBehaviour
     void Start()
     {
         homePosition = transform.position;
-        targetPosition = transform.TransformDirection(transform.position + transform.forward * distance);
+        targetPosition = transform.position + transform.forward * distance;
         rigidBody = GetComponent<Rigidbody>();
     }
   
