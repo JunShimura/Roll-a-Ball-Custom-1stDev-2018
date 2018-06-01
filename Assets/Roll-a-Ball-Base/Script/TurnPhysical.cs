@@ -16,6 +16,7 @@ public class TurnPhysical : MonoBehaviour
     Vector3 homePosition;
     Vector3 targetPosition;
     Rigidbody rigidBody;
+    public Vector3 currentVelocity;
 
     // Use this for initialization
     void Start()
@@ -28,6 +29,7 @@ public class TurnPhysical : MonoBehaviour
     private void FixedUpdate()
     {
         pastTime += Time.fixedDeltaTime;
+        currentVelocity = Vector3.Lerp(homePosition, targetPosition, Mathf.PingPong(pastTime, duration) / duration) - transform.position;
         rigidBody.MovePosition(
             Vector3.Lerp(homePosition, targetPosition, Mathf.PingPong(pastTime, duration) / duration));
     }

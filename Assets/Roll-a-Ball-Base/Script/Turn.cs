@@ -12,11 +12,11 @@ public class Turn : MonoBehaviour {
     Vector3 homePosition;
     Vector3 targetPosition;
 
+
     // Use this for initialization
     void Start () {
         homePosition = transform.position;
         targetPosition = transform.position + transform.forward * distance;
-		
 	}
 	
 	// Update is called once per frame
@@ -26,4 +26,5 @@ public class Turn : MonoBehaviour {
         transform.localPosition = newPosition;
 		
 	}
+
 }
