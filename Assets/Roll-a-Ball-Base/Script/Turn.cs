@@ -15,8 +15,8 @@ public class Turn : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        homePosition = transform.position;
-        targetPosition = transform.position + transform.forward * distance;
+		homePosition = transform.localPosition;
+        targetPosition = transform.localPosition + transform.forward * distance;
 	}
 	
 	// Update is called once per frame
