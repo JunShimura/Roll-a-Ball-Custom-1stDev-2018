@@ -1,4 +1,5 @@
 # Roll-a-Ball-Custom-1stDev-2018
+※最新リリースは2017.4.8f1でビルドしています。
 ## 概要
 このUnityプロジェクトは、Unity社が提供する「はじめてのUnity」をベースに、Unityに初めて触れる人が、ゲームを創ることがどういうものかを出来るだけ単純に体験するとを目的に制作したもので、Unity経験者が初心者にペアで利用することを想定ます。
 
@@ -16,7 +17,7 @@ https://unityroom.com/games/rollaballcustom1stdev2018sample
 Downloadでの、基本的な利用方法を説明します。
 ### プレイするまでの手順
 1. DownloadしたZipを適宜、解凍してください
-1. Unity(2018.1以降を推奨)を起動し、ProjectとしてDownloadしたフォルダを指定してください
+1. Unity(最新リリースは2017.4.8f1以降を推奨)を起動し、ProjectとしてDownloadしたフォルダを指定してください
 1. Assets/Roll-a-Ball-Base/内のStage01.sceneを開いてください
 1. エディタのプレイボタンでプレイできます
  1. キー操作はWASDかカーソルキー、ゲームパッドのアナログスティックで移動、スペースキーかゲームパッドのAボタンでジャンプします
