@@ -8,7 +8,7 @@ public class CatchRigidBody : MonoBehaviour {
 
     public string targetTag;
 
-    private List<GameObject> contactObject = new List<GameObject>();
+    private List<Rigidbody> contactRigidbody = new List<Rigidbody>();
     private new Rigidbody catchRigidbody;
     private Vector3 currentVelocity;
     public Vector3 fixedPosition;
@@ -30,22 +30,22 @@ public class CatchRigidBody : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag(targetTag) && !contactObject.Exists(  gameObject => gameObject.GetInstanceID() == collision.gameObject.GetInstanceID())) {
-            contactObject.Add(collision.gameObject);
+        if (collision.gameObject.CompareTag(targetTag) && !contactRigidbody.Exists(  gameObject => gameObject.GetInstanceID() == collision.gameObject.GetInstanceID())) {
+            contactRigidbody.Add(collision.gameObject.GetComponent<Rigidbody>());
         }
     }
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag(targetTag) && !contactObject.Exists(gameObject => gameObject.GetInstanceID() == collision.gameObject.GetInstanceID())) {
-            contactObject.Add(collision.gameObject);
+        if (collision.gameObject.CompareTag(targetTag) && !contactRigidbody.Exists(gameObject => gameObject.GetInstanceID() == collision.gameObject.GetInstanceID())) {
+            contactRigidbody.Add(collision.gameObject.GetComponent<Rigidbody>());
         }
     }
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag(targetTag)) {
-            int index = contactObject.FindIndex(gameObject => gameObject.GetInstanceID() == collision.gameObject.GetInstanceID());
+            int index = contactRigidbody.FindIndex(rigidbody => rigidbody.gameObject.GetInstanceID() == collision.gameObject.GetInstanceID());
             if (index != -1) {
-                contactObject.RemoveAt(index);
+                contactRigidbody.RemoveAt(index);
             }
         }
 
@@ -55,10 +55,11 @@ public class CatchRigidBody : MonoBehaviour {
         currentVelocity = transform.position - fixedPosition;
         fixedPosition = transform.position;
 
-        if ( contactObject.Capacity!=0) {
-            contactObject.ForEach(
-                delegate (GameObject gameObject) {
-                    gameObject.GetComponent<Rigidbody>().MovePosition(gameObject.transform.position+currentVelocity);
+        if ( contactRigidbody.Capacity!=0) {
+            contactRigidbody.ForEach(
+                delegate (Rigidbody rigidbody) {
+                    rigidbody.MovePosition(rigidbody.gameObject.transform.position + currentVelocity);
+                    //gameObject.GetComponent<Rigidbody>().AddForce(currentVelocity,ForceMode.VelocityChange);
                 });
             
         }
