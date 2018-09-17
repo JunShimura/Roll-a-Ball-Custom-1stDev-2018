@@ -4,14 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour
-{
+public class GameController : MonoBehaviour {
     [SerializeField] Canvas canvas;
     [SerializeField] Image scoreImage;
     [SerializeField] GameObject winnerLabelObject;
     [SerializeField] GameObject winnerLabel;
     [SerializeField] GameObject gameStartCanvas;
-    [SerializeField] GameObject mobileSingleStickControl;
     public GameObject player;
     public bool isStarted = false;
 
@@ -37,11 +35,6 @@ public class GameController : MonoBehaviour
         scoreController.SetGageUnit(initialCount);
         scoreController.ChangeValue(0);
         pastTime = 0.0f;
-#if UNITY_ANDROID
-        mobileSingleStickControl.SetActive(true);
-#endif
-
-
     }
 
     public void Update()

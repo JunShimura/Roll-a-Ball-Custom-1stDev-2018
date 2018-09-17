@@ -17,20 +17,22 @@ public class CatchRigidBody : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         catchRigidbody = gameObject.GetComponent<Rigidbody>();
         turnPhysical = gameObject.GetComponent<TurnPhysical>();
         turn = gameObject.GetComponent<Turn>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag(targetTag) && !contactRigidbody.Exists(  gameObject => gameObject.GetInstanceID() == collision.gameObject.GetInstanceID())) {
+        if (collision.gameObject.CompareTag(targetTag) && !contactRigidbody.Exists(gameObject => gameObject.GetInstanceID() == collision.gameObject.GetInstanceID())) {
             contactRigidbody.Add(collision.gameObject.GetComponent<Rigidbody>());
         }
     }
@@ -54,14 +56,15 @@ public class CatchRigidBody : MonoBehaviour {
     {
         currentVelocity = transform.position - fixedPosition;
         fixedPosition = transform.position;
-
-        if ( contactRigidbody.Capacity!=0) {
+        if (contactRigidbody.Capacity != 0) {
             contactRigidbody.ForEach(
                 delegate (Rigidbody rigidbody) {
-                    rigidbody.MovePosition(rigidbody.gameObject.transform.position + currentVelocity);
-                    //gameObject.GetComponent<Rigidbody>().AddForce(currentVelocity,ForceMode.VelocityChange);
-                });
-            
+                    if (rigidbody != null) {
+                        rigidbody.MovePosition(rigidbody.gameObject.transform.position + currentVelocity);
+                        //gameObject.GetComponent<Rigidbody>().AddForce(currentVelocity,ForceMode.VelocityChange);
+                    }
+                }
+             );
         }
     }
 }
