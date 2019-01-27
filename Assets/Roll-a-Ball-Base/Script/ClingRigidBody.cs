@@ -32,7 +32,10 @@ public class ClingRigidBody : MonoBehaviour
         }
         public void MoveRelativePosition(Vector3 pos)
         {
-            rigidbody.MovePosition(rigidbody.gameObject.transform.position + pos);
+            if (rigidbody != null)
+            {
+                rigidbody.MovePosition(rigidbody.gameObject.transform.position + pos);
+            }
         }
     }
     private List<ContactObject> contactObject = new List<ContactObject>();
@@ -69,37 +72,34 @@ public class ClingRigidBody : MonoBehaviour
     {
         currentVelocity = transform.position - fixedPosition;
         fixedPosition = transform.position;
-        if (contactObject.Capacity != 0)
+        if (currentVelocity != Vector3.zero && contactObject.Capacity != 0)
         {
             contactObject.ForEach(
                 delegate (ContactObject contactObject)
                 {
-                    if (contactObject.rigidbody != null)
-                    {
-                        contactObject.MoveRelativePosition(currentVelocity);
-                    }
+                    contactObject.MoveRelativePosition(currentVelocity);
                 }
              );
+            // contactObject.ForEach(MoveRerativePosition(currentVelocity)) ;
         }
     }
 
 
     private int SearchContact(Collision collision)
     {
-        int index = -1;
-        if (targetTag.Count == 0 || targetTag.Contains(collision.gameObject.tag))
-        {
-            int instanceID = collision.gameObject.GetInstanceID();
-            index = contactObject.FindIndex(contactObject => contactObject.instanceID == instanceID);
-        }
-        return index;
+        return contactObject.FindIndex(
+            contactObject =>
+                contactObject.instanceID == collision.gameObject.GetInstanceID());
     }
 
     private void CatchContact(Collision collision)
     {
-        if (SearchContact(collision) != -1)
+        if (targetTag.Count == 0 || targetTag.Contains(collision.gameObject.tag))
         {
-            contactObject.Add(new ContactObject(collision));
+            if (SearchContact(collision) == -1)
+            {
+                contactObject.Add(new ContactObject(collision));
+            }
         }
     }
 }

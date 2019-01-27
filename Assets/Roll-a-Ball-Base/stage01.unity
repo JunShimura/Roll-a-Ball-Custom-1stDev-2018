@@ -405,6 +405,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 19
       objectReference: {fileID: 0}
+    - target: {fileID: 114865095427724486, guid: a8b720899588daa438aa7007b71514ab,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8b720899588daa438aa7007b71514ab, type: 2}
   m_IsPrefabParent: 0
@@ -673,7 +678,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db862c5c3491fed4fbfd1a890be54232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: []
+  targetTag:
+  - Player
 --- !u!1001 &1206730865
 Prefab:
   m_ObjectHideFlags: 0
