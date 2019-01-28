@@ -4,11 +4,18 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 
+///<summary>
+///Cling by Moveposition the contacted GameObject contains RigidBody
+/// </summary>
 public class ClingRigidBody : MonoBehaviour
 {
-
+    [Header("Set target tags")]
+    [Tooltip("List of tags of Clingable GameObject.If it's empty,target all gameobjects ")]
     public List<string> targetTag = new List<string>();
 
+    /// <summary>
+    /// Contacted Objects
+    /// </summary>
     public class ContactObject
     {
         public Collision collision
@@ -23,26 +30,60 @@ public class ClingRigidBody : MonoBehaviour
         {
             get;
         }
+        private Transform dummyTransform;
+        private Vector3 prevPosition;
+        private Vector3 prevFoward;
+        private Vector3 adjustVector;
+        private Quaternion adjustFoward;
 
-        public ContactObject(Collision col)
+        /// <summary>
+        /// Constructor for ContactObject
+        /// </summary>
+        /// <param name="col">Contacted Collision</param>
+        /// <param name="transform">transform to be engaged</param>
+        public ContactObject(Collision col, Transform transform)
         {
             collision = col;
             rigidbody = collision.rigidbody;
             instanceID = collision.gameObject.GetInstanceID();
+            dummyTransform = new GameObject().transform;
+            dummyTransform.position = col.transform.position;
+            dummyTransform.SetParent(transform);
+            prevPosition = dummyTransform.position;
+            prevFoward = dummyTransform.forward;
         }
-        public void MoveRelativePosition(Vector3 pos)
+        /// <summary>
+        /// Move position to Engaged
+        /// </summary>
+        public void MoveRelativePosition()
         {
+
             if (rigidbody != null)
             {
-                rigidbody.MovePosition(rigidbody.gameObject.transform.position + pos);
+                adjustVector = dummyTransform.position - prevPosition;
+                if (adjustVector != Vector3.zero)
+                {
+                    rigidbody.MovePosition(rigidbody.gameObject.transform.position + adjustVector);
+                    prevPosition = rigidbody.gameObject.transform.position + adjustVector;
+                    dummyTransform.position = rigidbody.gameObject.transform.position + adjustVector;
+                }
+                adjustFoward = Quaternion.FromToRotation(prevFoward, dummyTransform.forward);
+                if (adjustFoward != Quaternion.identity)
+                {
+                    rigidbody.MoveRotation(rigidbody.transform.rotation * adjustFoward);
+                    prevFoward = dummyTransform.forward;
+                }
+
             }
+        }
+        public void Remove()
+        {
+            Destroy(dummyTransform.gameObject);
         }
     }
     private List<ContactObject> contactObject = new List<ContactObject>();
 
     private new Rigidbody catchRigidbody;
-    private Vector3 currentVelocity;
-    private Vector3 fixedPosition;
 
     // Use this for initialization
     void Awake()
@@ -64,27 +105,37 @@ public class ClingRigidBody : MonoBehaviour
         int index = SearchContact(collision);
         if (index != -1)
         {
+            contactObject[index].Remove();
             contactObject.RemoveAt(index);
         }
     }
 
     private void FixedUpdate()
     {
-        currentVelocity = transform.position - fixedPosition;
-        fixedPosition = transform.position;
-        if (currentVelocity != Vector3.zero && contactObject.Capacity != 0)
+        if (contactObject.Capacity != 0)
         {
             contactObject.ForEach(
-                delegate (ContactObject contactObject)
+                delegate (ContactObject cO)
                 {
-                    contactObject.MoveRelativePosition(currentVelocity);
+                    if (cO.rigidbody != null)
+                    {
+                        cO.MoveRelativePosition();
+                    }
+                    else
+                    {
+                        contactObject.Remove(cO);
+                    }
                 }
              );
-            // contactObject.ForEach(MoveRerativePosition(currentVelocity)) ;
         }
     }
 
 
+    /// <summary>
+    /// Search colision object in ContactObject 
+    /// </summary>
+    /// <param name="collision"></param>
+    /// <returns>Found index</returns>
     private int SearchContact(Collision collision)
     {
         return contactObject.FindIndex(
@@ -92,13 +143,17 @@ public class ClingRigidBody : MonoBehaviour
                 contactObject.instanceID == collision.gameObject.GetInstanceID());
     }
 
+    /// <summary>
+    /// Add collision object to the list of ContactObject
+    /// </summary>
+    /// <param name="collision">collision</param>
     private void CatchContact(Collision collision)
     {
         if (targetTag.Count == 0 || targetTag.Contains(collision.gameObject.tag))
         {
             if (SearchContact(collision) == -1)
             {
-                contactObject.Add(new ContactObject(collision));
+                contactObject.Add(new ContactObject(collision, this.transform));
             }
         }
     }
