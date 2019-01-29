@@ -30,9 +30,9 @@ public class TurnPhysical : MonoBehaviour
     {
         pastTime += Time.fixedDeltaTime;
         nextPosition = Vector3.Lerp(homePosition, targetPosition, Mathf.PingPong(pastTime, duration)/duration );
-        rigidBody.MovePosition(
-            Vector3.Lerp(homePosition, targetPosition, Mathf.PingPong(pastTime, duration) / duration));
+        //rigidBody.MovePosition(
+        //    Vector3.Lerp(homePosition, targetPosition, Mathf.PingPong(pastTime, duration) / duration));
 
-        //rigidBody.AddForce(nextPosition-transform.position-rigidBody.velocity,ForceMode.VelocityChange);
+        rigidBody.AddForce(nextPosition-transform.position-rigidBody.velocity,ForceMode.VelocityChange);
     }
 }
