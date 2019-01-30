@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 
 [RequireComponent(typeof(Rigidbody))]
 
-public class TurnKinetic : MonoBehaviour
+public class TurnKinematic : MonoBehaviour
 {
 
     [Header("かかる時間"), Range(0.0625f, 30)]
@@ -58,7 +58,6 @@ public class TurnKinetic : MonoBehaviour
     private void FixedUpdate()
     {
         pastTime += Time.fixedDeltaTime;
-        nextPosition = Vector3.Lerp(homePosition, targetPosition, Mathf.PingPong(pastTime, duration) / duration);
         rigidBody.MovePosition(
             Vector3.Lerp(homePosition, targetPosition, Mathf.PingPong(pastTime, duration) / duration));
     }

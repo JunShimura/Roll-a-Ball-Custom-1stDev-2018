@@ -1248,7 +1248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 2
-  _distance: 10
+  _distance: 0
 --- !u!114 &1196749302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1273,7 +1273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 757b0217bcd791d49a2b6a802d72cf5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.5
+  duration: 10
   _distance: 10
   targetPosition: {x: 0, y: 0, z: 0}
   nextPosition: {x: 0, y: 0, z: 0}
@@ -1291,7 +1291,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 84
+  m_Constraints: 80
   m_CollisionDetection: 2
 --- !u!23 &1196749305
 MeshRenderer:
