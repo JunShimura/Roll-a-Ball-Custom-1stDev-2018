@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Round : MonoBehaviour {
+public class Rotate : MonoBehaviour {
 
     [Header("かかる時間"),Range(0.0625f,100)]
     public float duration = 1.0f;

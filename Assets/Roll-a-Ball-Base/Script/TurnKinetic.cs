@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 
 [RequireComponent(typeof(Rigidbody))]
 
-public class TurnPhysical : MonoBehaviour
+public class TurnKinetic : MonoBehaviour
 {
 
     [Header("かかる時間"), Range(0.0625f, 30)]
@@ -31,10 +31,11 @@ public class TurnPhysical : MonoBehaviour
         return transform.localPosition + transform.forward * distance;
     }
 
+
     float pastTime = 0;
     Vector3 homePosition;
-    public Vector3 targetPosition;
-    public Vector3 nextPosition;
+    private Vector3 targetPosition;
+    private Vector3 nextPosition;
     Rigidbody rigidBody;
 
     // Use this for initialization
@@ -42,17 +43,23 @@ public class TurnPhysical : MonoBehaviour
     {
         homePosition = transform.position;
         targetPosition = GetTargetPosition(_distance);
-    }
-    private void Start()
-    {
         rigidBody = GetComponent<Rigidbody>();
-        Assert.IsTrue(rigidBody.isKinematic, "Rigidbody is Kinetic");
+        if (rigidBody == null)
+        {
+            Debug.LogError("Unable to GetComponent at Awake");
+        }
+        if (!rigidBody.isKinematic)
+        {
+            Debug.LogWarning("Rigidbody is not Kinetic");
+        }
+
     }
 
     private void FixedUpdate()
     {
         pastTime += Time.fixedDeltaTime;
         nextPosition = Vector3.Lerp(homePosition, targetPosition, Mathf.PingPong(pastTime, duration) / duration);
-        rigidBody.AddForce(nextPosition - transform.position - rigidBody.velocity, ForceMode.VelocityChange);
+        rigidBody.MovePosition(
+            Vector3.Lerp(homePosition, targetPosition, Mathf.PingPong(pastTime, duration) / duration));
     }
 }
