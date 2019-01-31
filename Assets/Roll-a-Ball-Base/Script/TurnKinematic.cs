@@ -50,7 +50,7 @@ public class TurnKinematic : MonoBehaviour
         }
         if (!rigidBody.isKinematic)
         {
-            Debug.LogWarning("Rigidbody is not Kinetic");
+            Debug.LogWarning("Rigidbody is not Kinematic");
         }
 
     }
