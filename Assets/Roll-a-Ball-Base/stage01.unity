@@ -410,7 +410,14 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114238232626325916, guid: a8b720899588daa438aa7007b71514ab,
+        type: 2}
+      propertyPath: _distance
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114865095427724486, guid: a8b720899588daa438aa7007b71514ab, type: 2}
+    - {fileID: 114846734572621936, guid: a8b720899588daa438aa7007b71514ab, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a8b720899588daa438aa7007b71514ab, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &813717718
@@ -1150,7 +1157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 1
-  distance: 1
+  _distance: 0
 --- !u!1001 &1685125627
 Prefab:
   m_ObjectHideFlags: 0
