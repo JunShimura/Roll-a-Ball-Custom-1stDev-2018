@@ -83,7 +83,7 @@ public class ClingRigidBody : MonoBehaviour
     }
     private List<ContactObject> contactObject = new List<ContactObject>();
 
-    private new Rigidbody catchRigidbody;
+    private Rigidbody catchRigidbody;
 
     // Use this for initialization
     void Awake()

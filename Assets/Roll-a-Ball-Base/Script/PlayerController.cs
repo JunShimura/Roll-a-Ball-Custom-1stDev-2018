@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody))]
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
     public float speed = 10;
     public float upForce = 20.0f;
     public float animationFrameRate = 10f;
@@ -88,7 +89,6 @@ public class PlayerController : MonoBehaviour {
         Destroy(particleInstance, brokenTime);
         rigidbody.velocity = Vector3.zero;
         rigidbody.isKinematic = true;
-
         Destroy(gameObject, brokenTime);
     }
     public void SetClear()
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour {
 
     private IEnumerator ClearAnimationCoroutine()
     {
-        for (;;) {
+        for (; ; ) {
             transform.Rotate(Vector3.forward * animationRate);
             yield return new WaitForSeconds(1 / animationFrameRate);
         }
